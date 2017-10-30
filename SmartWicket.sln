@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartWicket", "SmartWicket\SmartWicket.csproj", "{5A05FC4E-4DD4-4820-B21E-A500EF3D3222}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartWicket.ObjectModel", "SmartWicket.ObjectModel\SmartWicket.ObjectModel.csproj", "{FC104DBF-2E16-4F53-ADEB-C6E63BA4AEE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartWicket.Infrastruture", "SmartWicket.Infrastruture\SmartWicket.Infrastruture.csproj", "{DD356448-1D6A-462B-9497-ABD84CCBCDFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartWicket.DataBase", "SmartWicket.DataBase\SmartWicket.DataBase.csproj", "{C16FEE74-B6C2-45D6-BBFE-D08038F19E83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{5A05FC4E-4DD4-4820-B21E-A500EF3D3222}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A05FC4E-4DD4-4820-B21E-A500EF3D3222}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A05FC4E-4DD4-4820-B21E-A500EF3D3222}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC104DBF-2E16-4F53-ADEB-C6E63BA4AEE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC104DBF-2E16-4F53-ADEB-C6E63BA4AEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC104DBF-2E16-4F53-ADEB-C6E63BA4AEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC104DBF-2E16-4F53-ADEB-C6E63BA4AEE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD356448-1D6A-462B-9497-ABD84CCBCDFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD356448-1D6A-462B-9497-ABD84CCBCDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD356448-1D6A-462B-9497-ABD84CCBCDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD356448-1D6A-462B-9497-ABD84CCBCDFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C16FEE74-B6C2-45D6-BBFE-D08038F19E83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C16FEE74-B6C2-45D6-BBFE-D08038F19E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C16FEE74-B6C2-45D6-BBFE-D08038F19E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C16FEE74-B6C2-45D6-BBFE-D08038F19E83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
