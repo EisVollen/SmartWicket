@@ -22,9 +22,13 @@ namespace SmartWicket.DataBase.Objects
 
         public Guid VisitorId { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Дата посещения")]
         public DateTime VisitDate { get; set; }
-       
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Дата создания посещения")]
         public DateTime CreatedDate { get; set; }
 

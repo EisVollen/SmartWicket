@@ -25,10 +25,15 @@ namespace SmartWicket.DataBase
         [Display(Name = "Фамилия")]
         [StringLength(50)]
         public string LastName { get; set; }
+
         [Display(Name = "Имя")]
         [StringLength(50)]
         public string FirstName { get; set; }
+
         [Display(Name = "Дата рождения")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+
         public System.DateTime BirthDate { get; set; }
         [Display(Name = "Пол")]
         public bool Sex { get; set; }

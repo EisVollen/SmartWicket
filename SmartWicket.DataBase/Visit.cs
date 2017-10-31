@@ -21,8 +21,13 @@ namespace SmartWicket.DataBase
         [Display(Name ="Посетитель")]
         public System.Guid VisitorId { get; set; }
         [Display(Name = "Дата посещения")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime VisitDate { get; set; }
+
         [Display(Name = "Дата создания посещения")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime CreatedDate { get; set; }
     
         public virtual Visitor Visitor { get; set; }
