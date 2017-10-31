@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C16FEE74-B6C2-45D6-BBFE-D08038F19E83}</ProjectGuid>
+    <ProjectGuid>{CB787E22-181B-45CD-B496-228ABE1F67B8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SmartWicket.DataBase</RootNamespace>
@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Objects\Entity.cs" />
+    <Compile Include="Objects\VisitDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmartWicketDataBase.Context.cs">
       <AutoGen>True</AutoGen>
@@ -73,9 +75,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
     <EntityDeploy Include="SmartWicketDataBase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SmartWicketDataBase.Designer.cs</LastGenOutput>
@@ -97,6 +96,9 @@
       <DependentUpon>SmartWicketDataBase.edmx</DependentUpon>
       <LastGenOutput>SmartWicketDataBase.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

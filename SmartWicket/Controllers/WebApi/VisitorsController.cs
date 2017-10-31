@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Linq;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Microsoft.Ajax.Utilities;
-using Newtonsoft.Json;
-using SmartWicket.Infrastruture.DbContext;
+using System.Net;
+using System.Web.Mvc;
+using SmartWicket.DataBase;
 using SmartWicket.Infrastruture.RepositoryImpl;
-using SmartWicket.ObjectModel.Core;
 
 namespace SmartWicket.Controllers.WebApi
 {
-    /// <summary>
-    /// CRUD контролер для работы с Посетителями
-    /// </summary>
-    public class VisitorsController : ApiController
+    public class VisitorsController : Controller
     {
         private readonly VisitorRepository _visitorRepository;
 
@@ -22,56 +16,91 @@ namespace SmartWicket.Controllers.WebApi
             var visitContext = new SmartWicketEntities();
             this._visitorRepository = new VisitorRepository(visitContext, visitContext.Visitors);
         }
-
-        // GET: api/Visitors
-        public string GetVisitors()
+        // GET: Visitors
+        public ActionResult Index()
         {
-            var objects = _visitorRepository.List().ToList().Select(o => new
-            {
-                o.Id ,
-                o.LastName,
-                o.FirstName,
-                o.BirthDate,
-                Sex = o.Sex? "Женский":"Мужской"
-            });
-            return JsonConvert.SerializeObject(objects);
+            return View(_visitorRepository.List().ToList());
         }
 
-        // GET: api/Visitors/5
-        public string GetVisit(Guid id)
+        // GET: Visitors/Details/5
+        public ActionResult Details(Guid id)
         {
-            var visitor = _visitorRepository.Get(id);
-            var obj = new
+            Visitor visitor = _visitorRepository.Get(id);
+            if (visitor == null)
             {
-                visitor.Id,
-                visitor.LastName,
-                visitor.FirstName,
-                visitor.BirthDate,
-                Sex = visitor.Sex ? "Женский" : "Мужской"
-            };
-            return JsonConvert.SerializeObject(obj);
-        }
-
-        // POST: api/Visitors
-        [ResponseType(typeof(Visit))]
-        public IHttpActionResult SaveVisit(Visitor visitor)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
+                return HttpNotFound();
             }
-            _visitorRepository.SaveOrUpdate(visitor);
-           
-            return CreatedAtRoute("DefaultApi", new { id = visitor.Id }, visitor);
+            return View(visitor);
         }
 
-        // DELETE: api/Visitors/5
-        [ResponseType(typeof(Visit))]
-        public IHttpActionResult DeleteVisit(Guid id)
+        // GET: Visitors/Create
+        public ActionResult Create()
         {
-            _visitorRepository.Delete(id);
-            return Ok();
+            return View();
         }
-      
+
+        // POST: Visitors/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,LastName,FirstName,BirthDate,Sex")] Visitor visitor)
+        {
+            if (ModelState.IsValid)
+            {
+                visitor.Id = Guid.NewGuid();
+                _visitorRepository.SaveOrUpdate(visitor);
+                return RedirectToAction("Index");
+            }
+
+            return View(visitor);
+        }
+
+        // GET: Visitors/Edit/5
+        public ActionResult Edit(Guid id)
+        {
+            Visitor visitor = _visitorRepository.Get(id);
+            if (visitor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(visitor);
+        }
+
+        // POST: Visitors/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,LastName,FirstName,BirthDate,Sex")] Visitor visitor)
+        {
+            if (ModelState.IsValid)
+            {
+               _visitorRepository.SaveOrUpdate(visitor);
+                return RedirectToAction("Index");
+            }
+            return View(visitor);
+        }
+
+        // GET: Visitors/Delete/5
+        public ActionResult Delete(Guid id)
+        {
+            Visitor visitor = _visitorRepository.Get(id);
+            if (visitor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(visitor);
+        }
+
+        // POST: Visitors/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(Guid id)
+        {
+           _visitorRepository.Delete(id);
+            return RedirectToAction("Index");
+        }
+        
     }
 }

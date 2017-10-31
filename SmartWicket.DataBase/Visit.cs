@@ -7,16 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using SmartWicket.DataBase.Objects;
+
 namespace SmartWicket.DataBase
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Visit
+    public partial class Visit: Entity
     {
-        public System.Guid Id { get; set; }
+        [Display(Name ="Посетитель")]
         public System.Guid VisitorId { get; set; }
+        [Display(Name = "Дата посещения")]
         public System.DateTime VisitDate { get; set; }
+        [Display(Name = "Дата создания посещения")]
         public System.DateTime CreatedDate { get; set; }
     
         public virtual Visitor Visitor { get; set; }

@@ -7,23 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using SmartWicket.DataBase.Objects;
+
 namespace SmartWicket.DataBase
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
-    public partial class Visitor
+    public partial class Visitor: Entity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Visitor()
         {
             this.Visits = new HashSet<Visit>();
         }
-    
-        public System.Guid Id { get; set; }
+        [Display(Name = "Фамилия")]
+        [StringLength(50)]
         public string LastName { get; set; }
+        [Display(Name = "Имя")]
+        [StringLength(50)]
         public string FirstName { get; set; }
+        [Display(Name = "Дата рождения")]
         public System.DateTime BirthDate { get; set; }
+        [Display(Name = "Пол")]
         public bool Sex { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

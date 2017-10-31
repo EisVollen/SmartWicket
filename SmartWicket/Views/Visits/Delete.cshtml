@@ -1,0 +1,46 @@
+﻿@model SmartWicket.DataBase.Objects.VisitDTO
+
+@{
+    ViewBag.Title = "Удаление";
+}
+
+<h2>Удалить посещение</h2>
+
+<h3>Вы уверены, что хотите удалить запись о посещении?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VisitorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VisitorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VisitDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VisitDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться к списку", "Index")
+        </div>
+    }
+</div>

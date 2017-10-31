@@ -27,5 +27,7 @@ namespace SmartWicket.DataBase
     
         public virtual DbSet<Visitor> Visitors { get; set; }
         public virtual DbSet<Visit> Visits { get; set; }
+
+        public System.Data.Entity.DbSet<SmartWicket.DataBase.Objects.VisitDTO> VisitDTOes { get; set; }
     }
 }

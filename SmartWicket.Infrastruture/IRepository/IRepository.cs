@@ -11,5 +11,7 @@ namespace SmartWicket.Infrastruture.IRepository
         void SaveOrUpdate(T1 obj);
         IQueryable<T1> List();
 
+        void Attach(T1 obj);
+
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace SmartWicket.ObjectModel.Core
+namespace SmartWicket.DataBase.Objects
 {
     /// <summary>
     /// Базовый класс для возможножности агрегации CRUD операций
     /// </summary>
-    public class Entity
+    public abstract class Entity
     {
         public Guid Id { get; set; }
     }

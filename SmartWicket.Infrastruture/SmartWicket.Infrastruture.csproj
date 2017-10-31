@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DD356448-1D6A-462B-9497-ABD84CCBCDFF}</ProjectGuid>
+    <ProjectGuid>{047CADF5-2C54-4F6D-A7F7-3EB41DC01270}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SmartWicket.Infrastruture</RootNamespace>
@@ -30,22 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,27 +47,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutofacContainer.cs" />
-    <Compile Include="DbContext\SmartWicketEntities.cs" />
-    <Compile Include="RepositoryImpl\VisitorRepository.cs" />
-    <Compile Include="RepositoryImpl\VisitRepository.cs" />
     <Compile Include="IRepository\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryImpl\Repository.cs" />
+    <Compile Include="RepositoryImpl\VisitorRepository.cs" />
+    <Compile Include="RepositoryImpl\VisitRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmartWicket.ObjectModel\SmartWicket.ObjectModel.csproj">
-      <Project>{fc104dbf-2e16-4f53-adeb-c6e63ba4aee0}</Project>
-      <Name>SmartWicket.ObjectModel</Name>
+    <ProjectReference Include="..\SmartWicket.DataBase\SmartWicket.DataBase.csproj">
+      <Project>{CB787E22-181B-45CD-B496-228ABE1F67B8}</Project>
+      <Name>SmartWicket.DataBase</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

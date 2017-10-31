@@ -2,7 +2,9 @@
 using System;
 using System.Data.Entity;
 using System.Linq;
-using SmartWicket.ObjectModel.Core;
+using SmartWicket.DataBase;
+using SmartWicket.DataBase.Objects;
+
 
 namespace SmartWicket.Infrastruture.RepositoryImpl
 {
@@ -11,7 +13,7 @@ namespace SmartWicket.Infrastruture.RepositoryImpl
     /// </summary>
     /// <typeparam name="T1"></typeparam>
     /// <typeparam name="T2"></typeparam>
-    public abstract class Repository<T1, T2> : IRepository<T1, T2>
+    public abstract class Repository<T1, T2> : IRepository<T1, T2>, IDisposable
         where T1 : Entity
         where T2 : System.Data.Entity.DbContext
 
@@ -97,6 +99,17 @@ namespace SmartWicket.Infrastruture.RepositoryImpl
         public IQueryable<T1> List()
         {
             return _entity;
+        }
+
+        public void Attach(T1 obj)
+        {
+            _entity.Attach(obj);
+            _context.SaveChanges();
+        }
+       
+        public void Dispose()
+        {
+            _context.Dispose();
         }
     }
 }
