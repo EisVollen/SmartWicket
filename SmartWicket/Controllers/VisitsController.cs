@@ -1,49 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using SmartWicket.DataBase;
+using SmartWicket.DataBase.Objects;
+using SmartWicket.Infrastruture.RepositoryImpl;
 
-namespace SmartWicket.Controllers.WebApi
+namespace SmartWicket.Controllers
 {
-    public class TestController : Controller
+    public class VisitsController : Controller
     {
         private SmartWicketEntities db = new SmartWicketEntities();
+        private readonly VisitRepository _visitRepository;
 
-        // GET: Test
+        public VisitsController()
+        {
+            var visitContext = new SmartWicketEntities();
+            this._visitRepository = new VisitRepository(visitContext, visitContext.Visits);
+        }
+        // GET: Visits
         public ActionResult Index()
         {
-            var visits = db.Visits.Include(v => v.Visitor);
-            return View(visits.ToList());
+            return View(_visitRepository.List()
+                .ToList()
+                .Select(visit => new VisitDTO
+                {
+                    Id = visit.Id,
+                    VisitDate = visit.VisitDate,
+                    CreatedDate = visit.CreatedDate,
+                    VisitorName = $"{visit.Visitor.LastName} {visit.Visitor.FirstName}",
+                }));
         }
 
-        // GET: Test/Details/5
-        public ActionResult Details(Guid? id)
+        // GET: Visits/Details/5
+        public ActionResult Details(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Visit visit = db.Visits.Find(id);
-            if (visit == null)
-            {
-                return HttpNotFound();
-            }
-            return View(visit);
+            VisitDTO visitDTO = new VisitDTO( _visitRepository.Get(id));
+           
+            return View(visitDTO);
         }
 
-        // GET: Test/Create
+        // GET: Visits/Create
         public ActionResult Create()
         {
             ViewBag.VisitorId = new SelectList(db.Visitors, "Id", "LastName");
             return View();
         }
 
-        // POST: Test/Create
+        // POST: Visits/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -53,74 +56,66 @@ namespace SmartWicket.Controllers.WebApi
             if (ModelState.IsValid)
             {
                 visit.Id = Guid.NewGuid();
-                db.Visits.Add(visit);
-                db.SaveChanges();
+                _visitRepository.SaveOrUpdate(visit);
                 return RedirectToAction("Index");
             }
-
             ViewBag.VisitorId = new SelectList(db.Visitors, "Id", "LastName", visit.VisitorId);
             return View(visit);
         }
 
-        // GET: Test/Edit/5
-        public ActionResult Edit(Guid? id)
+        // GET: Visits/Edit/5
+        public ActionResult Edit(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Visit visit = db.Visits.Find(id);
+            var visit = _visitRepository.Get(id);
+
             if (visit == null)
             {
                 return HttpNotFound();
             }
             ViewBag.VisitorId = new SelectList(db.Visitors, "Id", "LastName", visit.VisitorId);
+            
             return View(visit);
         }
 
-        // POST: Test/Edit/5
+        // POST: Visits/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VisitorId,VisitDate,CreatedDate")] Visit visit)
+        public ActionResult Edit([Bind(Include = "Id,VisitorId,VisitDate,CreatedDate,VisitorName")] VisitDTO visitDTO)
         {
+            var visit = visitDTO.ToEntity();
             if (ModelState.IsValid)
             {
-                db.Entry(visit).State = EntityState.Modified;
-                db.SaveChanges();
+                _visitRepository.SaveOrUpdate(visit);
                 return RedirectToAction("Index");
             }
             ViewBag.VisitorId = new SelectList(db.Visitors, "Id", "LastName", visit.VisitorId);
+
             return View(visit);
         }
 
-        // GET: Test/Delete/5
-        public ActionResult Delete(Guid? id)
+        // GET: Visits/Delete/5
+        public ActionResult Delete(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Visit visit = db.Visits.Find(id);
+            var visit = _visitRepository.Get(id);
+           
             if (visit == null)
             {
                 return HttpNotFound();
             }
-            return View(visit);
+            VisitDTO visitDTO = new VisitDTO(visit);
+            return View(visitDTO);
         }
 
-        // POST: Test/Delete/5
+        // POST: Visits/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Visit visit = db.Visits.Find(id);
-            db.Visits.Remove(visit);
-            db.SaveChanges();
+            _visitRepository.Delete(id);
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

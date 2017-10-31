@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 using SmartWicket.DataBase;
 using SmartWicket.Infrastruture.RepositoryImpl;
 
-namespace SmartWicket.Controllers.WebApi
+namespace SmartWicket.Controllers
 {
     public class VisitorsController : Controller
     {
